@@ -9,6 +9,6 @@ Ceci contient:
 - Generateur de mot de passe
 - Chronometre générale
 - Jeu de maths
-- calculatrice générale
-- calculatrice de pourboire
-- généateur de cercle
+- Calculatrice générale
+- Calculatrice de pourboire
+- Généateur de cercle
