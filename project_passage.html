@@ -2,6 +2,7 @@
 
 <head>
 
+  <meta charset="utf-8">
   <style>
 
   </style>
@@ -12,11 +13,27 @@
 
 <body>
 
-  <input type="text"></input>
-
-  <script src="C:\Users\tomas.duchesne\Documents\GitHub\ICS3CGtomasduchesne\tablemanager.js"></script>
+  <input id="contenant" type="text"></input><br>
+  <button onclick="génère()">Génère un mot de passe</button><br>
+  <div id="output"></div>
   <script>
-    createTable(0,0,2);
+    var motdepasse;
+    var caractères = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!?&*()';
+
+    function génère() {
+      var longueur = document.getElementById("contenant").value;
+      for (f = 0; f < longueur; f++) {
+        var rand = Math.floor(Math.random() * caractères.length);
+        var nouveauCaractère = caractères.slice(rand, rand + 1);
+        if (f == 0) {
+          motdepasse = nouveauCaractère;
+        } else {
+          motdepasse += nouveauCaractère;
+        }
+      }
+      document.getElementById("output").innerHTML = motdepasse;
+      console.log(motdepasse);
+    }
   </script>
 
 </body>
