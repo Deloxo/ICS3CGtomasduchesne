@@ -4,16 +4,124 @@
 
     <style>
 
-    </style>
+    body {
+      background-image: linear-gradient(to top, #000000, #444444);
+    }
 
-    <link rel="" type="" href="">
+    #header {
+      border-radius: 13px 13px 0px 0px;
+      background-color: black;
+      border: solid black 2px;
+      height: 40px;
+      color: white;
+      text-align: center;
+      font-size: 30;
+    }
+
+    button {
+      border: solid black 2px;
+      background-color: #040404;
+      color: white;
+      width: 250px;
+      margin-top: 30px;
+    }
+
+    #content {
+      border: solid black 1px;
+      height: 500px;
+      width: 350px;
+      margin: auto;
+      background-color: white;
+      margin-top: 150px;
+      border-radius: 15px;
+      justify-content: center;
+    }
+
+    #formlist {
+      padding-left: 50px;
+      padding-top: 30px;
+    }
+
+    input {
+      color: #aaaaaa;
+    }
+
+    select {
+      color: #aaaaaa;
+    }
+    </style>
 
   </head>
 
   <body>
 
-    <script>
+    <div id="content">
+      <div id="header">
+        <h id="textcontainer">
+        TIP CALCULATOR
+      </h>
+      </div>
+      <div id="formlist">
+      <label id="label1">How much was your bill?</label><br>
+      <input id="input1" onfocus="replaceDefaultText(1)" value="Bill Amount" onblur="replaceDefaultText(4)"><p>
+      <label id="label2">How was your service?</label><br>
+      <select id="input2" onfocus="replaceDefaultText(2)" value="-- Choose an Option --" onblur="replaceDefaultText(5)">
+        <option value="-- Choose an Option --">-- Choose an Option --</option>
+        <option value="1.3">Great</option>
+        <option value="1.25">Good</option>
+        <option value="1.2">Mediocre</option>
+        <option value="1.25">Bad</option>
+        <option value="1.0">Horrible</option>
+      </select>
+      <p>
+      <label id="label3">How many people are sharing the bill?</label><br>
+      <input id="input3" onfocus="replaceDefaultText(3)" value="Number of People" onblur="replaceDefaultText(6)"> people<p>
+      <button id="calculateButton" onclick="calculateTip()">CALCULATE!</button>
+    </div>
+    </div>
 
+    <script>
+      var inp1 = document.getElementById("input1");
+      var inp2 = document.getElementById("input2");
+      var inp3 = document.getElementById("input3");
+      function replaceDefaultText(which) {
+        if (which == 1 && inp1.value == "Bill Amount") {
+          inp1.value = "";
+          inp1.style.color = "#000000";
+        }
+        if (which == 2 && inp2.value == "-- Choose an Option --") {
+          inp2.value = "";
+          inp2.style.color = "#000000";
+          inp2.remove(0);
+        }
+        if (which == 3 && inp3.value == "Number of People") {
+          inp3.value = "";
+          inp3.style.color = "#000000";
+        }
+        if (which == 4 && inp1.value.length == 0) {
+          inp1.value = "Bill Amount";
+        }
+        if (which == 5 && inp2.value.length == 0) {
+          inp2.value = "-- Choose an Option --";
+        }
+        if (which == 6 && inp3.value.length == 0) {
+          inp3.value = "Number of People";
+        }
+      }
+
+      function calculateTip() {
+        var billAmount = (parseFloat(inp1.value) * parseFloat(inp2.value)) / parseInt(inp3.value);
+        document.getElementById("formlist").innerHTML = "Your final bill (per person) with tip is $" + Math.floor(billAmount*100)/100;
+        var refreshButton = document.createElement("BUTTON");
+        document.getElementById("formlist").appendChild(refreshButton);
+        var buttonText = document.createTextNode("Calculate Again");
+        refreshButton.appendChild(buttonText);
+        refreshButton.hasAttribute("onclick", "refreshPage()");
+      }
+
+      function refreshPage() {
+        location.reload();
+      }
     </script>
 
   </body>

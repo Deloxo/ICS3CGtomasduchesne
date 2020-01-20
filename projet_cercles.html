@@ -1,21 +1,105 @@
 <html>
+<head>
 
-  <head>
+  <style>
+  body {
+    background-color: #000000;
+  }
+  </style>
+</head>
 
-    <style>
+<body>
 
-    </style>
+  <canvas id="canvas">
+  </canvas>
 
-    <link rel="" type="" href="">
+  <script>
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  var x;
+  canvas.height = 900;
+  canvas.width = 1200;
+  var circles = [];
+  var circleCount = 200;
+  var red;
+  var green;
+  var blue;
+  var randomRadii;
+  var posXRand;
+  var posYRand;
 
-  </head>
+function draw() {
+  for (x = 0; x < circleCount; x++) {
+    red = Math.floor(Math.random()*255);
+    green = Math.floor(Math.random()*255);
+    blue = Math.floor(Math.random()*255);
+    posXRand = Math.floor(Math.random()*1200+1);
+    posYRand = Math.floor(Math.random()*900+1);
+    randomRadii = Math.floor(Math.random()*80+1);
+    circles.push(posXRand);
+    circles.push(posYRand);
+    circles.push(randomRadii);
+    circles.push(red);
+    circles.push(green);
+    circles.push(blue);
+  }
+}
+setInterval(function () {
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    for (x = 0; x < circleCount; x++) {
+      circles[0 + (x*6)] += Math.floor(Math.random()*3)-1;
+      if (circles[0 + (x*6)] <= 0) {
+        circles[0 + (x*6)] = canvas.width;
+      }
+      if (circles[0 + (x*6)] >= canvas.width) {
+        circles[0 + (x*6)] = 0;
+      }
+      circles[1 + (x*6)] += Math.floor(Math.random()*3)-1;
+      if (circles[1 + (x*6)] <= 0) {
+        circles[1 + (x*6)] = canvas.height;
+      }
+      if (circles[1 + (x*6)] >= canvas.height) {
+        circles[1 + (x*6)] = 0;
+      }
+      circles[2 + (x*6)] += Math.floor(Math.random()*3)-1;
+      if (circles[2 + (x*6)] <= 0) {
+        circles[2 + (x*6)] = 80;
+      }
+      if (circles[2 + (x*6)] >= 80) {
+        circles[2 + (x*6)] = 0;
+      }
+      circles[3 + (x*6)] += Math.floor(Math.random()*3)-1;
+      if (circles[3 + (x*6)] <= 0) {
+        circles[3 + (x*6)] = 255;
+      }
+      if (circles[3 + (x*6)] >= 255) {
+        circles[3 + (x*6)] = 0;
+      }
+      circles[4 + (x*6)] += Math.floor(Math.random()*3)-1;
+      if (circles[4 + (x*6)] <= 0) {
+        circles[4 + (x*6)] = 255;
+      }
+      if (circles[4 + (x*6)] >= 255) {
+        circles[4 + (x*6)] = 0;
+      }
+      circles[5 + (x*6)] += Math.floor(Math.random()*3)-1;
+      if (circles[5 + (x*6)] <= 0) {
+        circles[5 + (x*6)] = 255;
+      }
+      if (circles[5 + (x*6)] >= 255) {
+        circles[5 + (x*6)] = 0;
+      }
+      ctx.beginPath();
+      ctx.strokeStyle = "rgb(" + circles[3 + (x*6)] + "," + circles[4 + (x*6)] + "," + circles[5 + (x*6)] + ")";
+      ctx.arc(circles[0 + (x*6)], circles[1 + (x*6)], circles[2 + (x*6)], 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+  }, 10);
 
-  <body>
+draw();
 
-    <script>
+  </script>
 
-    </script>
-
-  </body>
+</body>
 
 </html>
