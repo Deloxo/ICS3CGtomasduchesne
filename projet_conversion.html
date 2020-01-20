@@ -1,21 +1,220 @@
 <html>
 
-  <head>
+<head>
 
-    <style>
+  <style>
 
-    </style>
+  </style>
 
-    <link rel="" type="" href="">
+  <link rel="" type="" href="">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <script>
+  <select id="measures" onchange="changeMeasure(document.getElementById('measures').value)">
+    <option value="time">Time</option>
+    <option value="length">Length</option>
+    <option value="mass">Mass</option>
+    <option value="temperature">Temperature</option>
+  </select>
+  <p>
 
-    </script>
+    <select id="inputUnit" type="range">
+    </select>
+    <select id="outputUnit" type="range">
+      <option></option>
+      <option></option>
+      <option></option>
+    </select>
+    <p>
+      <input type="text" id="input"></input>
+      <input type="text" id="output" readonly></input>
+      <p><button onclick="convert()">convert</button>
 
-  </body>
+        <script>
+          var units = {
+            "time": [
+              second = {
+                "conversion": 1,
+                "name": "Second"
+              },
+              minute = {
+                "conversion": 60,
+                "name": "Minute"
+              },
+              hour = {
+                "conversion": 3600,
+                "name": "Hour"
+              },
+              day = {
+                "conversion": 86400,
+                "name": "Day"
+              },
+              week = {
+                "conversion": 604800,
+                "name": "Week"
+              },
+              year = {
+                "conversion": 31557600,
+                "name": "Year"
+              }
+            ],
+            "length": [
+              inch = {
+                "conversion": 2.54,
+                "name": "Inch"
+              },
+              foot = {
+                "conversion": 30.48,
+                "name": "Foot"
+              },
+              yard = {
+                "conversion": 91.44,
+                "name": "Yard"
+              },
+              mile = {
+                "conversion": 160934,
+                "name": "Mile"
+              },
+              metre = {
+                "conversion": 100,
+                "name": "Metre"
+              },
+              kilometre = {
+                "conversion": 100000,
+                "name": "Kilometre"
+              },
+              millimetre = {
+                "conversion": 0.1,
+                "name": "Millimetre"
+              },
+              centimetre = {
+                "conversion": 1,
+                "name": "Centimetre"
+              }
+            ],
+            "mass": [
+              kilogram = {
+                "conversion": 1000,
+                "name": "Kilogram"
+              },
+              gram = {
+                "conversion": 1,
+                "name": "Gram"
+              },
+              milligram = {
+                "conversion": 0.001,
+                "name": "Milligram"
+              },
+              tonne = {
+                "conversion": 1000000,
+                "name": "Tonne"
+              },
+              pound = {
+                "conversion": 453.592,
+                "name": "Pound"
+              },
+              ounce = {
+                "conversion": 28.3495,
+                "name": "Ounce"
+              }
+            ],
+            "temperature": [
+              celcius = {
+                "name": "Celsius"
+              },
+              fahrenheit = {
+                "name": "Fahrenheit"
+              },
+              kelvin = {
+                "name": "Kelvin"
+              }
+            ]
+          }
+          var inputValue = document.getElementById("input").value;
+          var conversionRate;
+          var outputValue;
+          var inputUnit;
+          var outputUnit;
+
+          function convert() {
+            outputValue = inputValue * conversionRate;
+            document.getElementById("output").value = outputValue;
+          }
+
+          changeMeasure("time");
+
+          function changeMeasure(measure) {
+            document.getElementById("inputUnit").innerHTML = "";
+            if (measure == "time") {
+              for (x = 0; x < units.time.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("inputUnit").appendChild(option);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.time[x].name);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.time[x].name;
+              }
+            }
+            if (measure == "length") {
+              for (x = 0; x < units.length.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("inputUnit").appendChild(option);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.length[x].name);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.length[x].name;
+              }
+            }
+            if (measure == "mass") {
+              for (x = 0; x < units.mass.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("inputUnit").appendChild(option);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.mass[x].name);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.mass[x].name;
+              }
+            }
+            if (measure == "temperature") {
+              for (x = 0; x < units.temperature.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("inputUnit").appendChild(option);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.temperature[x].name);
+                document.getElementById("inputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.temperature[x].name;
+              }
+            }
+            document.getElementById("outputUnit").innerHTML = "";
+            if (measure == "time") {
+              for (x = 0; x < units.time.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("outputUnit").appendChild(option);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.time[x].name);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.time[x].name;
+              }
+            }
+            if (measure == "length") {
+              for (x = 0; x < units.length.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("outputUnit").appendChild(option);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.length[x].name);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.length[x].name;
+              }
+            }
+            if (measure == "mass") {
+              for (x = 0; x < units.mass.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("outputUnit").appendChild(option);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.mass[x].name);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.mass[x].name;
+              }
+            }
+            if (measure == "temperature") {
+              for (x = 0; x < units.temperature.length; x++) {
+                var option = document.createElement("option");
+                document.getElementById("outputUnit").appendChild(option);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].setAttribute("value", units.temperature[x].name);
+                document.getElementById("outputUnit").getElementsByTagName("OPTION")[x].innerHTML = units.temperature[x].name;
+              }
+            }
+          }
+        </script>
+
+</body>
 
 </html>

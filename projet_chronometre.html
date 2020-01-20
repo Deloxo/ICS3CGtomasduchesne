@@ -12,8 +12,21 @@
 
   <body>
 
-    <script>
+    <input type="text" id="timeenter"></input>
+    <br><button onclick="start()">start</button>
 
+    <script>
+    var time = 0;
+    var done;
+    function start() {
+      time = document.getElementById("timeenter").value;
+      setInterval(function () {
+        if (time > 0) {
+        time = Math.floor(time * 100 - 1) / 100;
+        document.getElementById("timeenter").value = time;
+        }
+      }, 1);
+    }
     </script>
 
   </body>
